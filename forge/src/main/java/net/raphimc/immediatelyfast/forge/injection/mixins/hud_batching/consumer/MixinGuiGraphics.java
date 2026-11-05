@@ -1,5 +1,4 @@
-//? if =1.20.4 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.forge.injection.mixins.hud_batching.consumer;
+ */
+
+//? if =1.20.4 {
+/*package net.raphimc.immediatelyfast.forge.injection.mixins.hud_batching.consumer;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -29,15 +30,14 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class MixinGuiGraphics {
 
     @ModifyArg(method = "drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;FFIZ)I", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawInBatch(Lnet/minecraft/util/FormattedCharSequence;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;II)I"))
-    private MultiBufferSource renderTextIntoBuffer1(MultiBufferSource vertexConsumers) {
+    private MultiBufferSource renderTextIntoBuffer1(final MultiBufferSource vertexConsumers) {
         return BatchingBuffers.TEXT_CONSUMER != null ? BatchingBuffers.TEXT_CONSUMER : vertexConsumers;
     }
 
     @ModifyArg(method = "drawString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;FFIZ)I", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawInBatch(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/gui/Font$DisplayMode;IIZ)I"))
-    private MultiBufferSource renderTextIntoBuffer2(MultiBufferSource vertexConsumers) {
+    private MultiBufferSource renderTextIntoBuffer2(final MultiBufferSource vertexConsumers) {
         return BatchingBuffers.TEXT_CONSUMER != null ? BatchingBuffers.TEXT_CONSUMER : vertexConsumers;
     }
 
 }
-*/
-//?}
+*///?}

@@ -1,5 +1,4 @@
-//? if =1.20.4 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.forge.injection.mixins.core.compat.webdisplays;
+ */
+
+//? if =1.20.4 {
+/*package net.raphimc.immediatelyfast.forge.injection.mixins.core.compat.webdisplays;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -32,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MixinWebDisplays_MinePadRenderer {
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"))
-    private VertexConsumer fixForceDraw(MultiBufferSource vertexConsumerProvider, RenderType renderLayer) {
+    private VertexConsumer fixForceDraw(final MultiBufferSource vertexConsumerProvider, final RenderType renderLayer) {
         if (vertexConsumerProvider instanceof MultiBufferSource.BufferSource immediate) {
             immediate.endLastBatch();
             return null;
@@ -42,5 +43,4 @@ public abstract class MixinWebDisplays_MinePadRenderer {
     }
 
 }
-*/
-//?}
+*///?}

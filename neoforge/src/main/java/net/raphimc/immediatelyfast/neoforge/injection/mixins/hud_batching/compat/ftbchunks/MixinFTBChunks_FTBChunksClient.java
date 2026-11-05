@@ -1,5 +1,4 @@
-//? if =1.21.1 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching.compat.ftbchunks;
+ */
+
+//? if =1.21.1 {
+/*package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching.compat.ftbchunks;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,12 +34,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinFTBChunks_FTBChunksClient {
 
     @Inject(method = "renderHud", at = @At("HEAD"))
-    private void forceDrawBatch(CallbackInfo ci, @Local(argsOnly = true) GuiGraphics drawContext) {
+    private void forceDrawBatch(final CallbackInfo ci, final @Local(argsOnly = true) GuiGraphics drawContext) {
         if (ImmediatelyFast.runtimeConfig.hud_batching) {
             drawContext.flush();
         }
     }
 
 }
-
 *///?}

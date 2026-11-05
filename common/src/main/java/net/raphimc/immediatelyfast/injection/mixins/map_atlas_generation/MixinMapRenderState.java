@@ -1,4 +1,3 @@
-//? if >=1.21.4 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -16,39 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+//? if >=1.21.4 {
 package net.raphimc.immediatelyfast.injection.mixins.map_atlas_generation;
 
 import net.minecraft.client.renderer.state.MapRenderState;
-//?}
-//? if >=26.2 {
-import net.minecraft.resources.Identifier;
-//?}
-//? if (>=1.21.4 && <=26.1.2) {
-/*import net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture;
-*/
-//?}
-//? if >=1.21.4 {
 import net.raphimc.immediatelyfast.injection.interfaces.IMapRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
+//? if (>=1.21.4 && <=26.1.2) {
+/*import net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture;
+*///?}
+//? if >=26.2 {
+import net.minecraft.resources.Identifier;
+//?}
 
 @Mixin(MapRenderState.class)
 public abstract class MixinMapRenderState implements IMapRenderState {
-
-    @Unique
-//?}
     //? if >=26.2 {
+    @Unique
     private Identifier immediatelyFast$atlasTextureId;
+    //?}
 
     @Unique
-    //?}
-    //? if >=1.21.4 {
     private int immediatelyFast$atlasX;
 
     @Unique
     private int immediatelyFast$atlasY;
 
-    //?}
     //? if >=26.2 {
     @Override
     public Identifier immediatelyFast$getAtlasTextureId() {
@@ -60,12 +54,11 @@ public abstract class MixinMapRenderState implements IMapRenderState {
         this.immediatelyFast$atlasTextureId = identifier;
     }
     //?}
+
     //? if (>=1.21.4 && <=26.1.2) {
-/*    @Unique
+    /*@Unique
     private MapAtlasTexture immediatelyFast$atlasTexture;
-*/
-    //?}
-//? if >=1.21.4 {
+    *///?}
 
     @Override
     public int immediatelyFast$getAtlasX() {
@@ -86,10 +79,9 @@ public abstract class MixinMapRenderState implements IMapRenderState {
     public void immediatelyFast$setAtlasY(final int y) {
         this.immediatelyFast$atlasY = y;
     }
-//?}
-//? if (>=1.21.4 && <=26.1.2) {
-/*
-    @Override
+
+    //? if (>=1.21.4 && <=26.1.2) {
+    /*@Override
     public MapAtlasTexture immediatelyFast$getAtlasTexture() {
         return this.immediatelyFast$atlasTexture;
     }
@@ -98,9 +90,6 @@ public abstract class MixinMapRenderState implements IMapRenderState {
     public void immediatelyFast$setAtlasTexture(final MapAtlasTexture atlasTexture) {
         this.immediatelyFast$atlasTexture = atlasTexture;
     }
-
-*/
-//?}
-//? if >=1.21.4 {
+    *///?}
 }
 //?}

@@ -1,4 +1,3 @@
-//? if >=1.21.4 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -16,27 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+//? if >=1.21.4 {
 package net.raphimc.immediatelyfast.injection.interfaces;
 
-//?}
+//? if (>=1.21.4 && <=26.1.2) {
+/*import net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture;
+*///?}
 //? if >=26.2 {
 import net.minecraft.resources.Identifier;
 //?}
-//? if (>=1.21.4 && <=26.1.2) {
-/*import net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture;
-*/
-//?}
-//? if >=1.21.4 {
 
 public interface IMapRenderState {
-//?}
-//? if >=26.2 {
-
+    //? if >=26.2 {
     Identifier immediatelyFast$getAtlasTextureId();
 
     void immediatelyFast$setAtlasTextureId(final Identifier identifier);
-//?}
-//? if >=1.21.4 {
+    //?}
 
     int immediatelyFast$getAtlasX();
 
@@ -46,14 +41,10 @@ public interface IMapRenderState {
 
     void immediatelyFast$setAtlasY(final int y);
 
-//?}
     //? if (>=1.21.4 && <=26.1.2) {
-/*    MapAtlasTexture immediatelyFast$getAtlasTexture();
+    /*MapAtlasTexture immediatelyFast$getAtlasTexture();
 
     void immediatelyFast$setAtlasTexture(final MapAtlasTexture atlasTexture);
-
-*/
-    //?}
-//? if >=1.21.4 {
+    *///?}
 }
 //?}

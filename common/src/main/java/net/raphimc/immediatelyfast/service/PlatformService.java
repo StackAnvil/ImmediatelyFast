@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.raphimc.immediatelyfast.service;
 
-import net.raphimc.immediatelyfast.util.ServiceUtil;
+package net.raphimc.immediatelyfast.service;
 
 import java.nio.file.Path;
 import java.util.Optional;
+import net.raphimc.immediatelyfast.util.ServiceUtil;
 
 public interface PlatformService {
 

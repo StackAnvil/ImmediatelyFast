@@ -2,6 +2,8 @@ plugins {
     id "immediatelyfast.base-conventions"
 }
 
+sourceSets.main.java.srcDir("src/main/${project.source_family}")
+
 loom {
     accessWidenerPath = file("src/main/resources/${project.access_file}")
 }

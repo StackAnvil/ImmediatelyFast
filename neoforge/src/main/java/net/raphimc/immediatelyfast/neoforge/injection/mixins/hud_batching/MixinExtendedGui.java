@@ -1,5 +1,4 @@
-//? if =1.20.4 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching;
+ */
+
+//? if =1.20.4 {
+/*package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching;
 
 import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
 import net.raphimc.immediatelyfast.ImmediatelyFast;
@@ -39,7 +40,7 @@ public abstract class MixinExtendedGui {
         "renderTitle",
         "renderHealthMount"
     }, at = @At("HEAD"))
-    private void beginBatching(CallbackInfo ci) {
+    private void beginBatching(final CallbackInfo ci) {
         if (ImmediatelyFast.runtimeConfig.hud_batching) {
             BatchingBuffers.beginHudBatching();
         }
@@ -53,12 +54,11 @@ public abstract class MixinExtendedGui {
         "renderTitle",
         "renderHealthMount"
     }, at = @At("RETURN"))
-    private void endBatching(CallbackInfo ci) {
+    private void endBatching(final CallbackInfo ci) {
         if (ImmediatelyFast.runtimeConfig.hud_batching) {
             BatchingBuffers.endHudBatching();
         }
     }
 
 }
-*/
-//?}
+*///?}

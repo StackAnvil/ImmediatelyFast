@@ -15,45 +15,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.neoforge;
 
-//? if >=1.21.11 {
-import net.minecraft.resources.Identifier;
-//?}
-//? if (>=1.21.4 && <=1.21.10) {
-/*import net.minecraft.resources.ResourceLocation;
-*/
-//?}
+import net.neoforged.fml.common.Mod;
+import net.raphimc.immediatelyfast.ImmediatelyFast;
 //? if >=1.21.4 {
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-//?}
-import net.neoforged.fml.common.Mod;
-//? if >=1.21.4 {
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
-import net.raphimc.immediatelyfast.ImmediatelyFast;
 //?}
 
-@Mod("immediatelyfast")
 //? if >=1.21.10 {
+@Mod("immediatelyfast")
 @EventBusSubscriber(modid = "immediatelyfast")
+public class ImmediatelyFastNeoForge {
 //?}
 //? if =1.21.4 {
-/*@EventBusSubscriber(modid = "immediatelyfast", bus = EventBusSubscriber.Bus.MOD)
+/*@Mod("immediatelyfast")
+@EventBusSubscriber(modid = "immediatelyfast", bus = EventBusSubscriber.Bus.MOD)
 @SuppressWarnings("removal")
-*/
-//?}
 public class ImmediatelyFastNeoForge {
-
-    //? if >=1.21.11 {
+*///?}
+//? if <=1.21.1 {
+/*@Mod("immediatelyfast")
+public class ImmediatelyFastNeoForge {
+*///?}
+    //? if >=1.21.4 {
     private static final Identifier SIGN_TEXT_CACHE_RELOAD_LISTENER_ID = Identifier.fromNamespaceAndPath("immediatelyfast", "sign_text_cache_reload_listener");
-    //?}
-    //? if (>=1.21.4 && <=1.21.10) {
-/*    private static final ResourceLocation SIGN_TEXT_CACHE_RELOAD_LISTENER_ID = ResourceLocation.fromNamespaceAndPath("immediatelyfast", "sign_text_cache_reload_listener");
-*/
-    //?}
-//? if >=1.21.4 {
 
     @SubscribeEvent
     private static void onAddClientReloadListeners(final AddClientReloadListenersEvent event) {
@@ -61,6 +52,5 @@ public class ImmediatelyFastNeoForge {
             event.addListener(SIGN_TEXT_CACHE_RELOAD_LISTENER_ID, (ResourceManagerReloadListener) manager -> ImmediatelyFast.signTextCache.onResourceManagerReload(manager));
         }
     }
-
-//?}
+    //?}
 }

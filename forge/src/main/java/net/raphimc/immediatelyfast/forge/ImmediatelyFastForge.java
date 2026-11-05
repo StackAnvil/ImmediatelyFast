@@ -1,4 +1,3 @@
-//? if <=1.21.4 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -16,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.forge;
 
 import net.minecraftforge.fml.common.Mod;
@@ -23,5 +23,3 @@ import net.minecraftforge.fml.common.Mod;
 @Mod("immediatelyfast")
 public class ImmediatelyFastForge {
 }
-
-//?}

@@ -1,0 +1,39 @@
+// Keep shared sources in current Mojang names. These reversible replacements
+// cover namespace moves, including the descriptors in Mixin annotations.
+def replaceName = { String oldName, String currentName, boolean useOldName ->
+    stonecutter.replacements.regex(useOldName) {
+        replace('\\b' + java.util.regex.Pattern.quote(currentName) + '\\b', oldName,
+                '\\b' + java.util.regex.Pattern.quote(oldName) + '\\b', currentName)
+    }
+}
+
+def replacePackage = { String oldPackage, String currentPackage, boolean useOldPackage ->
+    replaceName(oldPackage, currentPackage, useOldPackage)
+    replaceName(oldPackage.replace('.', '/'), currentPackage.replace('.', '/'), useOldPackage)
+    def oldDescriptor = 'L' + oldPackage.replace('.', '/')
+    def currentDescriptor = 'L' + currentPackage.replace('.', '/')
+    // A reference parameter can follow a primitive directly, for example IZZLnet/...
+    stonecutter.replacements.regex(useOldPackage) {
+        replace(java.util.regex.Pattern.quote(currentDescriptor) + '\\b', oldDescriptor,
+                java.util.regex.Pattern.quote(oldDescriptor) + '\\b', currentDescriptor)
+    }
+}
+
+def beforeIdentifier = stonecutter.current.parsed.matches("<1.21.11")
+replaceName("ResourceLocation", "Identifier", beforeIdentifier)
+replacePackage("net.minecraft.client.renderer.RenderType",
+        "net.minecraft.client.renderer.rendertype.RenderType", beforeIdentifier)
+
+def beforeRenderPearl = stonecutter.current.parsed.matches("<26.3")
+[
+    "buffers": "api.buffers",
+    "textures": "api.textures",
+    "pipeline.RenderPipeline": "api.pipeline.RenderPipeline",
+    "opengl": "backend.opengl",
+    "GpuFormat": "api.GpuFormat",
+    "shaders.ShaderType": "api.pipeline.ShaderType",
+    "systems.DeviceInfo": "api.device.DeviceInfo"
+].each { oldPackage, currentPackage ->
+    replacePackage("com.mojang.blaze3d.${oldPackage}",
+            "com.mojang.renderpearl.${currentPackage}", beforeRenderPearl)
+}

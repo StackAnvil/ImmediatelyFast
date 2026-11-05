@@ -1,5 +1,4 @@
-//? if =1.21.10 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.neoforge.injection.mixins.skip_text_translucency_sorting;
+ */
+
+//? if =1.21.10 {
+/*package net.raphimc.immediatelyfast.neoforge.injection.mixins.skip_text_translucency_sorting;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,11 +33,10 @@ public abstract class MixinNeoForgeRenderTypes {
         "getTextIntensityPolygonOffsetFiltered",
         "getTextSeeThroughFiltered",
         "getTextIntensitySeeThroughFiltered"
-    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;create(Ljava/lang/String;IZZLcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;"), index = 3)
-    private static boolean changeTranslucency(boolean value) {
+    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/rendertype/RenderType;create(Ljava/lang/String;IZZLcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/client/renderer/rendertype/RenderType$CompositeState;)Lnet/minecraft/client/renderer/rendertype/RenderType$CompositeRenderType;"), index = 3)
+    private static boolean changeTranslucency(final boolean value) {
         return false;
     }
 
 }
-*/
-//?}
+*///?}

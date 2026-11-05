@@ -1,5 +1,4 @@
-//? if (>=1.21.1 && <=1.21.4) {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.neoforge.injection.mixins.screen_batching;
+ */
+
+//? if (>=1.21.1 && <=1.21.4) {
+/*package net.raphimc.immediatelyfast.neoforge.injection.mixins.screen_batching;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -33,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class MixinClientHooks {
 
     @WrapOperation(method = {"drawScreen", "lambda$drawScreen$1"}, at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/client/ClientHooks;drawScreenInternal(Lnet/minecraft/client/gui/screen/Screen;Lnet/minecraft/client/gui/DrawContext;IIF)V"))
-    private static void screenBatching(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, Operation<Void> original) {
+    private static void screenBatching(final Screen screen, final GuiGraphics guiGraphics, final int mouseX, final int mouseY, final float partialTick, final Operation<Void> original) {
         final boolean batchScreen = screen instanceof ChatScreen;
 
         if (ImmediatelyFast.runtimeConfig.experimental_screen_batching && batchScreen) {
@@ -44,5 +45,4 @@ public abstract class MixinClientHooks {
     }
 
 }
-
 *///?}

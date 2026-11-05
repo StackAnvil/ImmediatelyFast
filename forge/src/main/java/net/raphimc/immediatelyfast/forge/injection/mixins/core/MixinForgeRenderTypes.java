@@ -1,4 +1,3 @@
-//? if <=1.21.4 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -16,67 +15,50 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.forge.injection.mixins.core;
 
-
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+//? if (>=1.21.1 && <=1.21.4) {
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 //?}
 //? if =1.20.4 {
 /*import net.minecraft.client.renderer.RenderType;
-*/
-//?}
-//? if <=1.21.4 {
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-
-//?}
-//? if (>=1.21.1 && <=1.21.4) {
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-
-//?}
-//? if =1.20.4 {
-/*import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-*/
-//?}
-//? if <=1.21.4 {
+*///?}
 
 @Mixin(targets = "net.minecraftforge.client.ForgeRenderTypes$Internal", priority = 500)
 public abstract class MixinForgeRenderTypes {
-
-
-//?}
     //? if (>=1.21.1 && <=1.21.4) {
+    // Match the overload independently of its inherited Minecraft method name.
     @ModifyArg(method = {
-
-    //?}
-    //? if =1.20.4 {
-/*    @Inject(method = {
-*/
-    //?}
-        //? if <=1.21.4 {
         "getText",
         "getTextIntensity",
         "getTextPolygonOffset",
         "getTextIntensityPolygonOffset",
         "getTextSeeThrough",
         "getTextIntensitySeeThrough"
-
-        //?}
-    //? if (>=1.21.1 && <=1.21.4) {
-    }, at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/ForgeRenderTypes$Internal;of(Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;"), index = 5)
-    private static boolean changeTranslucency(boolean value) {
-        return false;
-
+    }, at = @At(value = "INVOKE", target = "Lnet/minecraftforge/client/ForgeRenderTypes$Internal;*(Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;", ordinal = 0, remap = false), index = 5)
+    private static boolean changeTranslucency(final boolean value) {
     //?}
     //? if =1.20.4 {
-/*    }, at = @At(value = "RETURN"), remap = false) // Forge doesn't allow me to target the of() call for some reason
-    private static void changeTranslucency(CallbackInfoReturnable<RenderType> cir) {
-        cir.getReturnValue().sortOnUpload = false;
-*/
-    //?}
-    //? if <=1.21.4 {
+    /*@Inject(method = {
+        "getText",
+        "getTextIntensity",
+        "getTextPolygonOffset",
+        "getTextIntensityPolygonOffset",
+        "getTextSeeThrough",
+        "getTextIntensitySeeThrough"
+    }, at = @At(value = "RETURN"), remap = false) // Forge workaround: modify the returned render type
+    private static void changeTranslucency(final CallbackInfoReturnable<RenderType> cir) {
+    *///?}
+        //? if (>=1.21.1 && <=1.21.4) {
+        return false;
+        //?}
+        //? if =1.20.4 {
+        /*cir.getReturnValue().sortOnUpload = false;
+        *///?}
     }
-
 }
-
-    //?}

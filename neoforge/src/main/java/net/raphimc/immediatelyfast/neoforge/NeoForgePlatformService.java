@@ -15,19 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.neoforge;
 
+import java.nio.file.Path;
+import java.util.Optional;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.fml.loading.moddiscovery.ModFileInfo;
 import net.raphimc.immediatelyfast.service.PlatformService;
 
-import java.nio.file.Path;
-import java.util.Optional;
-
 public class NeoForgePlatformService implements PlatformService {
-
     @Override
     public Path getConfigDirectory() {
         return FMLPaths.CONFIGDIR.get();
@@ -43,9 +42,7 @@ public class NeoForgePlatformService implements PlatformService {
             //?}
             //? if <=1.21.4 {
             /*return Optional.ofNullable(FMLLoader.getLoadingModList().getModFileById(id)).map(ModFileInfo::versionString);
-
             *///?}
         }
     }
-
 }

@@ -15,37 +15,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.feature.core;
 
-public class ImmediatelyFastRuntimeConfig {
 
+public class ImmediatelyFastRuntimeConfig {
     //? if <=1.21.4 {
     /*public boolean hud_batching;
-
     *///?}
+
     public boolean font_atlas_resizing;
+
     //? if >=26.2 {
     public boolean map_atlas_generation;
+
     public boolean fix_slow_buffer_upload_on_apple_gpu;
+
     public boolean avoid_redundant_framebuffer_switching;
     //?}
+
     //? if (>=1.21.10 && <=26.1.2) {
-/*    public boolean disable_fast_buffer_upload;
-*/
-    //?}
+    /*public boolean disable_fast_buffer_upload;
+    *///?}
+
     //? if <=1.21.4 {
     /*public boolean fast_buffer_upload;
-
     *///?}
+
     //? if (>=1.21.1 && <=1.21.4) {
     /*public boolean experimental_screen_batching;
-
     *///?}
 
     public ImmediatelyFastRuntimeConfig(final ImmediatelyFastConfig config) {
         //? if <=1.21.4 {
         /*this.hud_batching = config.hud_batching;
-
         *///?}
         this.font_atlas_resizing = config.font_atlas_resizing;
         //? if >=26.2 {
@@ -54,28 +57,34 @@ public class ImmediatelyFastRuntimeConfig {
         this.avoid_redundant_framebuffer_switching = config.avoid_redundant_framebuffer_switching;
         //?}
         //? if (>=1.21.10 && <=26.1.2) {
-/*        this.disable_fast_buffer_upload = false;
-*/
-        //?}
-    //? if >=1.21.10 {
+        /*this.disable_fast_buffer_upload = false;
+        *///?}
+        //? if <=1.21.4 {
+        /*this.fast_buffer_upload = config.fast_buffer_upload;
+        *///?}
+        //? if (>=1.21.1 && <=1.21.4) {
+        /*this.experimental_screen_batching = config.experimental_screen_batching;
+        *///?}
     }
 
+    //? if >=1.21.10 {
     public boolean getBoolean(final String key, final boolean defaultValue) {
+        //? if >=26.2 {
         return switch (key) {
             case "font_atlas_resizing" -> this.font_atlas_resizing;
-    //?}
-            //? if >=26.2 {
             case "map_atlas_generation" -> this.map_atlas_generation;
             case "disable_fast_buffer_upload", "fix_slow_buffer_upload_on_apple_gpu" -> this.fix_slow_buffer_upload_on_apple_gpu;
             case "disable_avoid_redundant_framebuffer_switching", "avoid_redundant_framebuffer_switching" -> this.avoid_redundant_framebuffer_switching;
-            //?}
-            //? if (>=1.21.10 && <=26.1.2) {
-/*            case "disable_fast_buffer_upload" -> this.disable_fast_buffer_upload;
-*/
-            //?}
-            //? if >=1.21.10 {
             default -> defaultValue;
         };
+        //?}
+        //? if (>=1.21.10 && <=26.1.2) {
+        /*return switch (key) {
+            case "font_atlas_resizing" -> this.font_atlas_resizing;
+            case "disable_fast_buffer_upload" -> this.disable_fast_buffer_upload;
+            default -> defaultValue;
+        };
+        *///?}
     }
 
     public int getInt(final String key, final int defaultValue) {
@@ -88,15 +97,6 @@ public class ImmediatelyFastRuntimeConfig {
 
     public String getString(final String key, final String defaultValue) {
         return defaultValue;
-            //?}
-        //? if <=1.21.4 {
-        /*this.fast_buffer_upload = config.fast_buffer_upload;
-
-        *///?}
-        //? if (>=1.21.1 && <=1.21.4) {
-        /*this.experimental_screen_batching = config.experimental_screen_batching;
-
-        *///?}
     }
-
+    //?}
 }

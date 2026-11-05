@@ -15,20 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.util;
 
 import java.util.List;
 import java.util.ServiceLoader;
 
 public class ServiceUtil {
-
-    //? if >=26.1.2 {
     public static <T> T load(final Class<T> service) {
-    //?}
-    //? if <=1.21.11 {
-    /*public static <T> T load(Class<T> service) {
-
-    *///?}
         final List<ServiceLoader.Provider<T>> providers = ServiceLoader.load(service).stream().toList();
         if (providers.isEmpty()) {
             throw new IllegalStateException("No implementation found for " + service.getName());
@@ -39,9 +33,7 @@ public class ServiceUtil {
         return providers.getFirst().get();
         //?}
         //? if =1.20.4 {
-/*        return providers.get(0).get();
-*/
-        //?}
+        /*return providers.get(0).get();
+        *///?}
     }
-
 }

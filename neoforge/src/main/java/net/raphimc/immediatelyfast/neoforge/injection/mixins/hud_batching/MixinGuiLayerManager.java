@@ -1,5 +1,4 @@
-//? if (>=1.21.1 && <=1.21.4) {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching;
+ */
+
+//? if (>=1.21.1 && <=1.21.4) {
+/*package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching;
 
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
@@ -39,12 +40,11 @@ public abstract class MixinGuiLayerManager {
             from = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/LayeredDraw$Layer;render(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V")
         )
     )
-    private void renderBatch(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    private void renderBatch(final GuiGraphics context, final DeltaTracker tickCounter, final CallbackInfo ci) {
         if (ImmediatelyFast.runtimeConfig.hud_batching) {
             context.flush();
         }
     }
 
 }
-
 *///?}

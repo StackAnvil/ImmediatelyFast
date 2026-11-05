@@ -8,7 +8,7 @@
     "core.MixinRenderTypes",
     "hud_batching.compat.appleskin.MixinAppleSkin_HUDOverlayHandler",
     "hud_batching.consumer.MixinGuiGraphics",
-    "screen_batching.MixinHandledScreen"
+    "screen_batching.MixinAbstractContainerScreen"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,4 @@
-//? if =1.20.4 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.forge.injection.mixins.hud_batching.compat.appleskin;
+ */
+
+//? if =1.20.4 {
+/*package net.raphimc.immediatelyfast.forge.injection.mixins.hud_batching.compat.appleskin;
 
 import net.raphimc.immediatelyfast.ImmediatelyFast;
 import net.raphimc.immediatelyfast.feature.batching.BatchingBuffers;
@@ -32,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinAppleSkin_HUDOverlayHandler {
 
     @Inject(method = "drawExhaustionOverlay", at = @At("RETURN"))
-    private static void forceDrawBatch(CallbackInfo ci) {
+    private static void forceDrawBatch(final CallbackInfo ci) {
         if (ImmediatelyFast.runtimeConfig.hud_batching && BatchingBuffers.isHudBatching()) {
             BatchingBuffers.endHudBatching();
             BatchingBuffers.beginHudBatching();
@@ -40,5 +41,4 @@ public abstract class MixinAppleSkin_HUDOverlayHandler {
     }
 
 }
-*/
-//?}
+*///?}

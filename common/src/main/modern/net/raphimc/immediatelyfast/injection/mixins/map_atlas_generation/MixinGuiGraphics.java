@@ -1,0 +1,68 @@
+/*
+ * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
+ * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+//? if (>=1.21.10 && <=1.21.11) {
+/*package net.raphimc.immediatelyfast.injection.mixins.map_atlas_generation;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.textures.GpuTextureView;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.state.MapRenderState;
+import net.raphimc.immediatelyfast.injection.interfaces.IMapRenderState;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import static net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture.ATLAS_SIZE;
+import static net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture.MAP_SIZE;
+//? if =1.21.11 {
+/^import com.mojang.renderpearl.api.textures.GpuSampler;
+^///?}
+
+@Mixin(GuiGraphics.class)
+public abstract class MixinGuiGraphics {
+    //? if =1.21.11 {
+    /^@WrapOperation(method = "submitMapRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;submitBlit(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lcom/mojang/renderpearl/api/textures/GpuTextureView;Lcom/mojang/renderpearl/api/textures/GpuSampler;IIIIFFFFI)V", ordinal = 0))
+    private void modifyTextureCoordinates(final GuiGraphics instance, final RenderPipeline pipeline, final GpuTextureView textureView, final GpuSampler sampler, final int x1, final int y1, final int x2, final int y2, float u1, float u2, float v1, float v2, final int color, final Operation<Void> original, final @Local(argsOnly = true) MapRenderState renderState) {
+        final IMapRenderState immediatelyFast$renderState = (IMapRenderState) renderState;
+        if (immediatelyFast$renderState.immediatelyFast$getAtlasTexture() != null && immediatelyFast$renderState.immediatelyFast$getAtlasTexture().getTextureId().equals(renderState.texture)) {
+            u1 = (float) immediatelyFast$renderState.immediatelyFast$getAtlasX() / ATLAS_SIZE;
+            u2 = (float) (immediatelyFast$renderState.immediatelyFast$getAtlasX() + MAP_SIZE) / ATLAS_SIZE;
+            v1 = (float) immediatelyFast$renderState.immediatelyFast$getAtlasY() / ATLAS_SIZE;
+            v2 = (float) (immediatelyFast$renderState.immediatelyFast$getAtlasY() + MAP_SIZE) / ATLAS_SIZE;
+        }
+        original.call(instance, pipeline, textureView, sampler, x1, y1, x2, y2, u1, u2, v1, v2, color);
+    }
+    ^///?}
+
+    //? if =1.21.10 {
+    /^@WrapOperation(method = "submitMapRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;submitBlit(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lcom/mojang/renderpearl/api/textures/GpuTextureView;IIIIFFFFI)V", ordinal = 0))
+    private void drawAtlasTexture(final GuiGraphics instance, final RenderPipeline pipeline, final GpuTextureView texture, final int x1, final int y1, final int x2, final int y2, float u1, float u2, float v1, float v2, final int color, final Operation<Void> original, final @Local(argsOnly = true) MapRenderState renderState) {
+        final IMapRenderState immediatelyFast$renderState = (IMapRenderState) renderState;
+        if (immediatelyFast$renderState.immediatelyFast$getAtlasTexture() != null && immediatelyFast$renderState.immediatelyFast$getAtlasTexture().getTextureId().equals(renderState.texture)) {
+            u1 = (float) immediatelyFast$renderState.immediatelyFast$getAtlasX() / ATLAS_SIZE;
+            u2 = (float) (immediatelyFast$renderState.immediatelyFast$getAtlasX() + MAP_SIZE) / ATLAS_SIZE;
+            v1 = (float) immediatelyFast$renderState.immediatelyFast$getAtlasY() / ATLAS_SIZE;
+            v2 = (float) (immediatelyFast$renderState.immediatelyFast$getAtlasY() + MAP_SIZE) / ATLAS_SIZE;
+        }
+        original.call(instance, pipeline, texture, x1, y1, x2, y2, u1, u2, v1, v2, color);
+    }
+    ^///?}
+}
+*///?}

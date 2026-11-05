@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.raphimc.immediatelyfast.fabric;
 
-import net.fabricmc.loader.api.FabricLoader;
-import net.raphimc.immediatelyfast.service.PlatformService;
+package net.raphimc.immediatelyfast.fabric;
 
 import java.nio.file.Path;
 import java.util.Optional;
+import net.fabricmc.loader.api.FabricLoader;
+import net.raphimc.immediatelyfast.service.PlatformService;
 
 public class FabricPlatformService implements PlatformService {
 

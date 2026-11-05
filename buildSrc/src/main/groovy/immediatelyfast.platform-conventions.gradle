@@ -31,6 +31,9 @@ dependencies {
     includeInJar(project(commonDependency)) {
         transitive = false
     }
+    if (project.parent.name in ["forge", "neoforge"] && project.hasProperty("reflect_version")) {
+        forgeRuntimeLibrary "net.lenni0451:Reflect:${project.reflect_version}"
+    }
 }
 
 jar {

@@ -1,5 +1,4 @@
-//? if =1.21.1 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,8 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching.compat.irons_spellbooks;
+ */
+
+//? if =1.21.1 {
+/*package net.raphimc.immediatelyfast.neoforge.injection.mixins.hud_batching.compat.irons_spellbooks;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
@@ -35,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinIronsSpellbooks_SpellBarOverlay {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lio/redspace/ironsspellbooks/api/spells/AbstractSpell;getSpellIconResource()Lnet/minecraft/util/Identifier;"), remap = true)
-    private void forceDrawBatch(CallbackInfo ci, @Local(argsOnly = true) GuiGraphics drawContext, @Share("hasDrawn") LocalBooleanRef hasDrawn) {
+    private void forceDrawBatch(final CallbackInfo ci, final @Local(argsOnly = true) GuiGraphics drawContext, final @Share("hasDrawn") LocalBooleanRef hasDrawn) {
         if (ImmediatelyFast.runtimeConfig.hud_batching && !hasDrawn.get()) {
             hasDrawn.set(true);
             drawContext.flush();
@@ -43,5 +44,4 @@ public abstract class MixinIronsSpellbooks_SpellBarOverlay {
     }
 
 }
-
 *///?}

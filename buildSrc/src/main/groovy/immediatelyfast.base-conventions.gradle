@@ -2,6 +2,7 @@ plugins {
     id "java-library"
     id "base.base-conventions"
     id "me.modmuss50.mod-publish-plugin"
+    id "immediatelyfast.mapping-conventions"
 }
 
 project.pluginManager.apply(project.remap_minecraft ? "dev.architectury.loom-remap" : "dev.architectury.loom-no-remap")

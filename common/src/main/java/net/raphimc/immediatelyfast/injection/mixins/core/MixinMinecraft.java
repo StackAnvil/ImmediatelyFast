@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.raphimc.immediatelyfast.injection.mixins.core;
 
 import net.minecraft.client.Minecraft;
@@ -26,47 +27,42 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-
+    //? if >=26.2 {
     //? if =26.3 {
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;initRenderer(Lcom/mojang/renderpearl/api/device/GpuDevice;)V", shift = At.Shift.AFTER))
+    private static void hookRendererInit(final CallbackInfo ci) {
     //?}
     //? if =26.2 {
-/*    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;initRenderer(Lcom/mojang/blaze3d/systems/GpuDevice;)V", shift = At.Shift.AFTER))
-*/
-    //?}
-    //? if >=26.2 {
+    /*@Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;initRenderer(Lcom/mojang/blaze3d/systems/GpuDevice;)V", shift = At.Shift.AFTER))
     private static void hookRendererInit(final CallbackInfo ci) {
+    *///?}
         ImmediatelyFast.onRenderSystemInit();
     }
 
-    //?}
     @Inject(method = "<init>", at = @At("RETURN"))
-    //? if >=26.2 {
     private void hookConstructor(final CallbackInfo ci) {
-    //?}
-    //? if <=26.1.2 {
-    /*private void initImmediatelyFast(CallbackInfo ci) {
-
-    *///?}
         ImmediatelyFast.lateInit();
     }
-
-    @Inject(method = "setLevel", at = @At("HEAD"))
-    //? if >=26.2 {
-    private void hookLevelChange(final CallbackInfo ci) {
     //?}
-    //? if (>=1.21.11 && <=26.1.2) {
-/*    private void hookLevelChange(CallbackInfo ci) {
-*/
-    //?}
-        //? if >=1.21.11 {
-        ImmediatelyFast.onLevelChange();
-        //?}
-    //? if <=1.21.10 {
-    /*private void callOnWorldJoin(CallbackInfo ci) {
-        ImmediatelyFast.onWorldJoin();
 
-    *///?}
+    //? if <=26.1.2 {
+    /*@Inject(method = "<init>", at = @At("RETURN"))
+    private void initImmediatelyFast(final CallbackInfo ci) {
+        ImmediatelyFast.lateInit();
     }
+    *///?}
 
+    //? if >=1.21.11 {
+    @Inject(method = "setLevel", at = @At("HEAD"))
+    private void hookLevelChange(final CallbackInfo ci) {
+        ImmediatelyFast.onLevelChange();
+    }
+    //?}
+
+    //? if <=1.21.10 {
+    /*@Inject(method = "setLevel", at = @At("HEAD"))
+    private void callOnWorldJoin(final CallbackInfo ci) {
+        ImmediatelyFast.onWorldJoin();
+    }
+    *///?}
 }

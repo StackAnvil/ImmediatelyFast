@@ -17,7 +17,8 @@
       "neoforge"
     ],
     "remap_minecraft": true,
-    "access_file": "immediatelyfast.accesswidener"
+    "access_file": "immediatelyfast.accesswidener",
+    "source_family": "legacy"
   },
   "1.21.1": {
     "minecraft_version": "1.21.1",
@@ -37,7 +38,8 @@
       "neoforge"
     ],
     "remap_minecraft": true,
-    "access_file": "immediatelyfast.accesswidener"
+    "access_file": "immediatelyfast.accesswidener",
+    "source_family": "legacy"
   },
   "1.21.4": {
     "minecraft_version": "1.21.4",
@@ -57,7 +59,8 @@
       "neoforge"
     ],
     "remap_minecraft": true,
-    "access_file": "immediatelyfast.accesswidener"
+    "access_file": "immediatelyfast.accesswidener",
+    "source_family": "legacy"
   },
   "1.21.10": {
     "minecraft_version": "1.21.10",
@@ -74,7 +77,8 @@
       "neoforge"
     ],
     "remap_minecraft": true,
-    "access_file": "immediatelyfast.accesswidener"
+    "access_file": "immediatelyfast.accesswidener",
+    "source_family": "modern"
   },
   "1.21.11": {
     "minecraft_version": "1.21.11",
@@ -92,7 +96,8 @@
       "neoforge"
     ],
     "remap_minecraft": true,
-    "access_file": "immediatelyfast.classtweaker"
+    "access_file": "immediatelyfast.classtweaker",
+    "source_family": "modern"
   },
   "26.1.2": {
     "minecraft_version": "26.1.2",
@@ -109,7 +114,8 @@
       "neoforge"
     ],
     "remap_minecraft": false,
-    "access_file": "immediatelyfast.classtweaker"
+    "access_file": "immediatelyfast.classtweaker",
+    "source_family": "modern"
   },
   "26.2": {
     "minecraft_version": "26.2",
@@ -125,7 +131,8 @@
       "neoforge"
     ],
     "remap_minecraft": false,
-    "access_file": "immediatelyfast.classtweaker"
+    "access_file": "immediatelyfast.classtweaker",
+    "source_family": "modern"
   },
   "26.3": {
     "minecraft_version": "26.3",
@@ -141,6 +148,7 @@
       "neoforge"
     ],
     "remap_minecraft": false,
-    "access_file": "immediatelyfast.classtweaker"
+    "access_file": "immediatelyfast.classtweaker",
+    "source_family": "modern"
   }
 }

@@ -1,5 +1,4 @@
-//? if =1.20.4 {
-/*/^
+/*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
  *
@@ -15,10 +14,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ^/
-package net.raphimc.immediatelyfast.fabric.injection.mixins.core;
+ */
 
-import net.minecraft.client.renderer.RenderType;
+//? if =1.20.4 {
+/*package net.raphimc.immediatelyfast.fabric.injection.mixins.core;
+
+import net.minecraft.client.renderer.rendertype.RenderType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -33,11 +34,10 @@ public abstract class MixinRenderTypes {
         "method_36436",
         "method_37348",
         "method_37347"
-    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;create(Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;"), index = 5)
-    private static boolean changeTranslucency(boolean value) {
+    }, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/rendertype/RenderType;create(Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/rendertype/RenderType$CompositeState;)Lnet/minecraft/client/renderer/rendertype/RenderType$CompositeRenderType;"), index = 5)
+    private static boolean changeTranslucency(final boolean value) {
         return false;
     }
 
 }
-*/
-//?}
+*///?}
