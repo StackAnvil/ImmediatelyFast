@@ -9,11 +9,14 @@ base {
     archivesName = project.jar_name
 }
 
+def commonProject = project(":common:${project.name}")
+evaluationDependsOn(commonProject.path)
+
 loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
+    accessWidenerPath = commonProject.loom.accessWidenerPath
     mods {
         "main" {
-            sourceSet(project(":common").sourceSets.main)
+            sourceSet(commonProject.sourceSets.main)
             sourceSet(project.sourceSets.main)
         }
     }
@@ -23,8 +26,9 @@ loom {
 }
 
 dependencies {
-    implementation project(":common")
-    includeInJar(project(":common")) {
+    def commonDependency = project.remap_minecraft ? [path: commonProject.path, configuration: "namedElements"] : [path: commonProject.path]
+    implementation project(commonDependency)
+    includeInJar(project(commonDependency)) {
         transitive = false
     }
 }

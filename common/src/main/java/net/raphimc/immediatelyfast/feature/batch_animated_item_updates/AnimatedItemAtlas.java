@@ -1,3 +1,4 @@
+//? if >=26.1.2 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -17,11 +18,28 @@
  */
 package net.raphimc.immediatelyfast.feature.batch_animated_item_updates;
 
+//?}
+//? if =26.2 {
+/*import com.mojang.blaze3d.GpuFormat;
+*/
+//?}
+//? if >=26.1.2 {
 import com.mojang.blaze3d.systems.RenderSystem;
+//?}
+//? if =26.3 {
 import com.mojang.renderpearl.api.GpuFormat;
+//?}
+//? if >=26.1.2 {
 import net.minecraft.client.gui.render.DynamicAtlasAllocator;
 import net.minecraft.client.gui.render.GuiItemAtlas;
 import net.minecraft.client.gui.render.GuiRenderer;
+//?}
+//? if =26.1.2 {
+/*import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+*/
+//?}
+//? if >=26.1.2 {
 import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
 import net.minecraft.client.renderer.item.TrackingItemStackRenderState;
 import net.minecraft.util.Mth;
@@ -38,11 +56,28 @@ public class AnimatedItemAtlas extends GuiItemAtlas {
     public static int computeTextureSizeFor(final int slotTextureSize, final int requiredSlotCount) {
         final int preferredSlotCount = requiredSlotCount + requiredSlotCount / 2;
         final int atlasSize = Mth.smallestSquareSide(preferredSlotCount);
+//?}
+        //? if >=26.2 {
         return Math.clamp(Mth.smallestEncompassingPowerOfTwo(atlasSize * slotTextureSize), MINIMUM_TEXTURE_SIZE, RenderSystem.getDevice().getDeviceInfo().limits().maxTextureSizeForFormat(GpuFormat.RGBA8_UNORM));
+        //?}
+        //? if =26.1.2 {
+/*        return Math.clamp(Mth.smallestEncompassingPowerOfTwo(atlasSize * slotTextureSize), MINIMUM_TEXTURE_SIZE, GuiItemAtlas.MAXIMUM_TEXTURE_SIZE);
+*/
+        //?}
+    //? if >=26.1.2 {
     }
 
+    //?}
+    //? if >=26.2 {
     public AnimatedItemAtlas(final FeatureRenderDispatcher featureRenderDispatcher, final int textureSize, final int slotTextureSize) {
         super(featureRenderDispatcher, textureSize, slotTextureSize);
+    //?}
+    //? if =26.1.2 {
+/*    public AnimatedItemAtlas(final SubmitNodeCollector submitNodeCollector, final FeatureRenderDispatcher featureRenderDispatcher, final MultiBufferSource.BufferSource bufferSource, final int textureSize, final int slotTextureSize) {
+        super(submitNodeCollector, featureRenderDispatcher, bufferSource, textureSize, slotTextureSize);
+*/
+    //?}
+    //? if >=26.1.2 {
     }
 
     @Override
@@ -57,7 +92,15 @@ public class AnimatedItemAtlas extends GuiItemAtlas {
     public void endFrame() {
         this.lastUsedSlotCount = this.allocator.usedSlotByKey.size();
         if (this.lastUsedSlotCount > 0) {
+    //?}
+            //? if >=26.2 {
             RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(this.texture, GuiRenderer.CLEAR_COLOR, this.depthTexture, 0D);
+            //?}
+            //? if =26.1.2 {
+/*            RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(this.texture, GuiRenderer.CLEAR_COLOR, this.depthTexture, 1D);
+*/
+            //?}
+            //? if >=26.1.2 {
             for (DynamicAtlasAllocator.Slot slot : this.allocator.usedSlotByKey.values()) {
                 slot.fresh = true;
             }
@@ -70,3 +113,4 @@ public class AnimatedItemAtlas extends GuiItemAtlas {
     }
 
 }
+            //?}

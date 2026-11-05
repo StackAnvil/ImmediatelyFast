@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "LGPL-3.0-or-later"
+issueTrackerURL = "https://github.com/StackAnvil/ImmediatelyFast/issues"
+
+[[mods]]
+modId = "immediatelyfast"
+version = "${version}"
+displayName = "ImmediatelyFast"
+description = "Speed up and optimize immediate mode rendering in Minecraft"
+authors = "RK_01"
+logoFile = "assets/immediatelyfast/icon.png"
+displayURL = "https://github.com/StackAnvil/ImmediatelyFast"
+
+[[mixins]]
+config = "immediatelyfast-common.mixins.json"
+
+[[mixins]]
+config = "immediatelyfast-neoforge.mixins.json"
+
+[[dependencies.immediatelyfast]]
+modId = "minecraft"
+versionRange = "[1.21.11]"
+side = "CLIENT"
+
+[[dependencies.immediatelyfast]]
+modId = "neoforge"
+versionRange = "[21.11.0,)"
+side = "CLIENT"

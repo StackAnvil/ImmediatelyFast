@@ -19,10 +19,43 @@ pluginManagement {
 
 plugins {
     id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"
+    id "dev.kikugie.stonecutter" version "0.9.8"
 }
 
 rootProject.name = "ImmediatelyFast"
 
-include(":common")
-include(":fabric")
-include(":neoforge")
+def matrix = new groovy.json.JsonSlurper().parse(file("gradle/versions.json"))
+def requested = providers.gradleProperty("minecraft").orNull?.split(",")?.toList()
+if (requested != null && (requested.isEmpty() || requested.any { !matrix.containsKey(it) })) {
+    throw new GradleException("Unknown Minecraft target. Choose from: ${matrix.keySet().join(', ')}")
+}
+def selected = matrix.findAll { version, target -> requested == null || version in requested }
+
+stonecutter {
+    kotlinController = false
+    centralScript = "build.gradle"
+    create(rootProject) {
+        vcsVersion = selected.containsKey("26.3") ? "26.3" : selected.keySet().last()
+        ["common", "fabric", "forge", "neoforge"].each { module ->
+            def targets = selected.findAll { version, target -> module == "common" || module in target.loaders }
+            if (!targets.isEmpty()) {
+                branch(module) {
+                    versions(*(targets.keySet() as String[]))
+                }
+            }
+        }
+    }
+}
+
+gradle.beforeProject { project ->
+    def target = matrix[project.name]
+    if (target != null) {
+        target.each { key, value -> project.ext.set(key, value) }
+        project.ext.git_branch = "26.3"
+        // Loader nodes share version names, so their default Gradle capabilities need distinct groups.
+        project.ext.maven_group = "net.stackanvil.immediatelyfast.${project.parent.name}"
+        project.ext.maven_version = target.maven_version.replace("-SNAPSHOT", "-stackanvil.1-SNAPSHOT")
+        project.ext.set("loom.platform", project.parent.name == "common" ? "fabric" : project.parent.name)
+        project.ext.jar_name = "ImmediatelyFast-${[common: 'Common', fabric: 'Fabric', forge: 'Forge', neoforge: 'NeoForge'][project.parent.name]}"
+    }
+}

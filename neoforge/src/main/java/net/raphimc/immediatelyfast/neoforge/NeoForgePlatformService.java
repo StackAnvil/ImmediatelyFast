@@ -38,7 +38,13 @@ public class NeoForgePlatformService implements PlatformService {
         if (ModList.get() != null) {
             return ModList.get().getModContainerById(id).map(m -> m.getModInfo().getVersion().toString());
         } else {
+            //? if >=1.21.10 {
             return Optional.ofNullable(FMLLoader.getCurrent().getLoadingModList().getModFileById(id)).map(ModFileInfo::versionString);
+            //?}
+            //? if <=1.21.4 {
+            /*return Optional.ofNullable(FMLLoader.getLoadingModList().getModFileById(id)).map(ModFileInfo::versionString);
+
+            *///?}
         }
     }
 

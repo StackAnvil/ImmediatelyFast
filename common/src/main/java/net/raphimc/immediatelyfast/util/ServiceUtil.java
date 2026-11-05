@@ -22,14 +22,26 @@ import java.util.ServiceLoader;
 
 public class ServiceUtil {
 
+    //? if >=26.1.2 {
     public static <T> T load(final Class<T> service) {
+    //?}
+    //? if <=1.21.11 {
+    /*public static <T> T load(Class<T> service) {
+
+    *///?}
         final List<ServiceLoader.Provider<T>> providers = ServiceLoader.load(service).stream().toList();
         if (providers.isEmpty()) {
             throw new IllegalStateException("No implementation found for " + service.getName());
         } else if (providers.size() > 1) {
             throw new IllegalStateException("Multiple implementations found for " + service.getName() + ": " + providers.stream().map(p -> p.type().getName()).toList());
         }
+        //? if >=1.21.1 {
         return providers.getFirst().get();
+        //?}
+        //? if =1.20.4 {
+/*        return providers.get(0).get();
+*/
+        //?}
     }
 
 }

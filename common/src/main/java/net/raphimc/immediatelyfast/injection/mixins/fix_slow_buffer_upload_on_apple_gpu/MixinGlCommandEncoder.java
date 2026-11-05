@@ -1,3 +1,4 @@
+//? if >=1.21.10 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -18,8 +19,21 @@
 package net.raphimc.immediatelyfast.injection.mixins.fix_slow_buffer_upload_on_apple_gpu;
 
 import com.llamalad7.mixinextras.sugar.Local;
+//?}
+//? if =26.3 {
 import com.mojang.renderpearl.api.buffers.GpuBufferSlice;
 import com.mojang.renderpearl.backend.opengl.DirectStateAccess;
+//?}
+//? if (>=1.21.10 && <=26.2) {
+/*import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.blaze3d.opengl.DirectStateAccess;
+*/
+//?}
+//? if (>=1.21.10 && <=26.1.2) {
+/*import com.mojang.blaze3d.opengl.GlCommandEncoder;
+*/
+//?}
+//? if >=1.21.10 {
 import net.raphimc.immediatelyfast.ImmediatelyFast;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,12 +41,47 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.nio.ByteBuffer;
 
+//?}
+//? if =26.3 {
 @Mixin(targets = "com.mojang.renderpearl.backend.opengl.GlCommandEncoder")
+//?}
+//? if =26.2 {
+/*@Mixin(targets = "com.mojang.blaze3d.opengl.GlCommandEncoder")
+*/
+//?}
+//? if (>=1.21.10 && <=26.1.2) {
+/*@Mixin(GlCommandEncoder.class)
+*/
+//?}
+//? if >=1.21.10 {
 public abstract class MixinGlCommandEncoder {
 
+//?}
+    //? if =26.3 {
     @Redirect(method = "writeToBuffer", at = @At(value = "INVOKE", target = "Lcom/mojang/renderpearl/backend/opengl/DirectStateAccess;bufferSubData(IJLjava/nio/ByteBuffer;I)V"))
+    //?}
+    //? if (>=1.21.11 && <=26.2) {
+/*    @Redirect(method = "writeToBuffer", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/opengl/DirectStateAccess;bufferSubData(IJLjava/nio/ByteBuffer;I)V"))
+*/
+    //?}
+    //? if >=26.2 {
     private void fixSlowBufferUploadOnAppleGpu(final DirectStateAccess instance, final int buffer, final long offset, final ByteBuffer data, final int usage, @Local(name = "slice", argsOnly = true) final GpuBufferSlice slice) {
         if (ImmediatelyFast.runtimeConfig.fix_slow_buffer_upload_on_apple_gpu && offset == 0 && slice.length() == slice.buffer().size()) {
+    //?}
+    //? if (>=1.21.11 && <=26.1.2) {
+/*    private void fixSlowBufferUploadOnAppleGpu(DirectStateAccess instance, int buffer, long offset, ByteBuffer data, int usage, @Local(argsOnly = true) GpuBufferSlice gpuBufferSlice) {
+*/
+    //?}
+    //? if =1.21.10 {
+/*    @Redirect(method = "writeToBuffer", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/opengl/DirectStateAccess;bufferSubData(IILjava/nio/ByteBuffer;I)V"))
+    private void fixSlowBufferUploadOnAppleGpu(DirectStateAccess instance, int buffer, int offset, ByteBuffer data, int usage, @Local(argsOnly = true) GpuBufferSlice gpuBufferSlice) {
+*/
+    //?}
+        //? if (>=1.21.10 && <=26.1.2) {
+/*        if (ImmediatelyFast.runtimeConfig.disable_fast_buffer_upload && offset == 0 && gpuBufferSlice.length() == gpuBufferSlice.buffer().size()) {
+*/
+        //?}
+            //? if >=1.21.10 {
             instance.bufferData(buffer, data, usage);
         } else {
             instance.bufferSubData(buffer, offset, data, usage);
@@ -40,3 +89,4 @@ public abstract class MixinGlCommandEncoder {
     }
 
 }
+            //?}

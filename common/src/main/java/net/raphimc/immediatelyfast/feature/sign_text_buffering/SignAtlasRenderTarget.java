@@ -17,54 +17,236 @@
  */
 package net.raphimc.immediatelyfast.feature.sign_text_buffering;
 
+//? if =26.2 {
+/*import com.mojang.blaze3d.GpuFormat;
+*/
+//?}
+//? if =1.21.10 {
+/*import com.mojang.blaze3d.opengl.GlDevice;
+import com.mojang.blaze3d.opengl.GlStateManager;
+import com.mojang.blaze3d.opengl.GlTexture;
+*/
+//?}
+//? if >=1.21.10 {
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.systems.RenderSystem;
+//?}
+//? if =26.3 {
 import com.mojang.renderpearl.api.GpuFormat;
+//?}
+//? if <=1.21.4 {
+/*import com.mojang.blaze3d.pipeline.RenderTarget;
+
+*///?}
 import net.minecraft.client.Minecraft;
+//? if >=1.21.11 {
 import net.minecraft.resources.Identifier;
+//?}
+//? if <=1.21.10 {
+/*import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.resources.ResourceLocation;
+
+*///?}
+//? if >=1.21.10 {
 import net.raphimc.immediatelyfast.ImmediatelyFast;
+//?}
+//? if >=1.21.11 {
 import net.raphimc.immediatelyfast.util.RenderTargetTexture;
+//?}
+//? if >=26.2 {
 import org.joml.Vector4f;
+//?}
+//? if <=1.21.1 {
+/*import net.minecraft.server.packs.resources.ResourceManager;
 
+*///?}
+//? if <=1.21.10 {
+/*import org.lwjgl.opengl.GL11C;
+
+*///?}
+//? if =1.21.10 {
+/*import org.lwjgl.opengl.GL30C;
+*/
+//?}
+
+//? if >=1.21.10 {
 public class SignAtlasRenderTarget extends TextureTarget implements AutoCloseable {
+//?}
+//? if <=1.21.4 {
+/*public class SignAtlasRenderTarget extends RenderTarget implements AutoCloseable {
 
+*///?}
+
+    //? if >=26.2 {
     private static final Vector4f CLEAR_COLOR = new Vector4f(0F);
+    //?}
+    //? if >=1.21.10 {
     public static final int ATLAS_SIZE = ImmediatelyFast.config.experimental_sign_atlas_size;
+    //?}
+    //? if <=1.21.4 {
+    /*public static final int ATLAS_SIZE = 4096;
 
+    *///?}
+
+    //? if >=1.21.11 {
     private final int id;
     private final Identifier textureId;
+    //?}
+    //? if <=1.21.10 {
+    /*private final ResourceLocation textureId;
+
+    *///?}
     private final Slot rootSlot;
 
+    //? if >=1.21.10 {
     public SignAtlasRenderTarget(final int id) {
+    //?}
+        //? if =26.3 {
         super("ImmediatelyFast Sign Atlas", ATLAS_SIZE, ATLAS_SIZE, GpuFormat.RGBA8_UNORM, GpuFormat.D32_FLOAT);
+        //?}
+        //? if =26.2 {
+/*        super("ImmediatelyFast Sign Atlas", ATLAS_SIZE, ATLAS_SIZE, true, GpuFormat.RGBA8_UNORM);
+*/
+        //?}
+        //? if (>=1.21.11 && <=26.1.2) {
+/*        super("ImmediatelyFast Sign Atlas", ATLAS_SIZE, ATLAS_SIZE, true);
+*/
+        //?}
+        //? if >=1.21.11 {
         this.id = id;
         this.textureId = Identifier.fromNamespaceAndPath("immediatelyfast", "sign_atlas/" + id);
         Minecraft.getInstance().getTextureManager().register(this.textureId, new RenderTargetTexture(this));
+        //?}
+        //? if =1.21.10 {
+/*        super("ImmediatelyFast Sign Atlas FBO", ATLAS_SIZE, ATLAS_SIZE, false);
+        this.textureId = ResourceLocation.fromNamespaceAndPath("immediatelyfast", "sign_atlas/" + id);
+*/
+        //?}
+    //? if <=1.21.4 {
+    /*public SignAtlasRenderTarget() {
+        super(false);
+
+    *///?}
+        //? if =1.21.4 {
+/*        this.resize(ATLAS_SIZE, ATLAS_SIZE);
+*/
+        //?}
+        //? if <=1.21.1 {
+        /*this.resize(ATLAS_SIZE, ATLAS_SIZE, Minecraft.ON_OSX);
+
+        *///?}
+        //? if <=1.21.4 {
+        /*Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
+
+        *///?}
+        //? if (>=1.21.1 && <=1.21.4) {
+        /*this.textureId = ResourceLocation.fromNamespaceAndPath("immediatelyfast", "sign_atlas/" + this.colorTextureId);
+
+        *///?}
+        //? if =1.20.4 {
+/*        this.textureId = new ResourceLocation("immediatelyfast", "sign_atlas/" + this.colorTextureId);
+*/
+        //?}
+        //? if <=1.21.10 {
+        /*Minecraft.getInstance().getTextureManager().register(this.textureId, new FboTexture());
+
+        *///?}
+
         this.rootSlot = new Slot(null, 0, 0, ATLAS_SIZE, ATLAS_SIZE);
+    //? if <=1.21.10 {
+    /*}
+
+
+    *///?}
+    //? if =1.21.10 {
+/*    public int bind(final boolean setViewport) {
+        final int previousFramebuffer = GL11C.glGetInteger(GL30C.GL_FRAMEBUFFER_BINDING);
+        final int fbo = ((GlTexture) SignAtlasRenderTarget.this.colorTexture).getFbo(((GlDevice) RenderSystem.getDevice()).directStateAccess(), null);
+        GL30C.glBindFramebuffer(GL30C.GL_FRAMEBUFFER, fbo);
+        if (setViewport) {
+            GL11C.glViewport(0, 0, ATLAS_SIZE, ATLAS_SIZE);
+        }
+        return previousFramebuffer;
+    }
+
+    public void unbind(final int previousFbo) {
+        GL30C.glBindFramebuffer(GL30C.GL_FRAMEBUFFER, previousFbo);
+        GL11C.glViewport(0, 0, Minecraft.getInstance().getWindow().getWidth(), Minecraft.getInstance().getWindow().getHeight());
+*/
+    //?}
+    //? if <=1.21.4 {
+    /*@Override
+    public void close() {
+        this.destroyBuffers();
+        Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
+
+    *///?}
     }
 
     public Slot findSlot(final int width, final int height) {
         return this.rootSlot.findSlot(width, height);
     }
 
+    //? if <=1.21.1 || >=1.21.10 {
     public void clear() {
+    //?}
+        //? if =26.3 {
         RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(this.getColorTexture(), CLEAR_COLOR, this.getDepthTexture(), 0D);
+        //?}
+        //? if =26.2 {
+/*        RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(this.getColorTexture(), CLEAR_COLOR, this.getDepthTexture(), 0F);
+*/
+        //?}
+        //? if (>=1.21.11 && <=26.1.2) {
+/*        RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(this.getColorTexture(), 0, this.getDepthTexture(), 1F);
+*/
+        //?}
+        //? if =1.21.10 {
+/*        RenderSystem.getDevice().createCommandEncoder().clearColorTexture(this.getColorTexture(), 0);
+*/
+        //?}
+    //? if =1.21.4 {
+/*    public void clearAtlas() {
+        this.clear();
+*/
+    //?}
+        //? if <=1.21.1 {
+        /*this.clear(Minecraft.ON_OSX);
+
+        *///?}
+        //? if <=1.21.4 {
+        /*Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
+
+        *///?}
+
         this.rootSlot.subSlot1 = null;
         this.rootSlot.subSlot2 = null;
     }
 
+    //? if >=1.21.11 {
     public int getId() {
         return this.id;
     }
 
     public Identifier getTextureId() {
+    //?}
+    //? if <=1.21.10 {
+    /*public ResourceLocation getTextureId() {
+
+    *///?}
         return this.textureId;
+    //? if >=1.21.10 {
     }
 
     @Override
     public void close() {
+    //?}
+        //? if >=1.21.11 {
         Minecraft.getInstance().getTextureManager().release(this.textureId);
+        //?}
+        //? if >=1.21.10 {
         this.destroyBuffers();
+        //?}
     }
 
     public class Slot {
@@ -95,7 +277,45 @@ public class SignAtlasRenderTarget extends TextureTarget implements AutoCloseabl
             }
             this.occupied = false;
             removeUnoccupiedSubSlots(this);
+            //? if =26.3 {
             RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(SignAtlasRenderTarget.this.getColorTexture(), CLEAR_COLOR, SignAtlasRenderTarget.this.getDepthTexture(), 0D, this.x, ATLAS_SIZE - this.y - this.height, this.width, this.height, 0);
+            //?}
+            //? if =26.2 {
+/*            RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(SignAtlasRenderTarget.this.getColorTexture(), CLEAR_COLOR, SignAtlasRenderTarget.this.getDepthTexture(), 0F, this.x, ATLAS_SIZE - this.y - this.height, this.width, this.height);
+*/
+            //?}
+            //? if (>=1.21.11 && <=26.1.2) {
+/*            RenderSystem.getDevice().createCommandEncoder().clearColorAndDepthTextures(SignAtlasRenderTarget.this.getColorTexture(), 0, SignAtlasRenderTarget.this.getDepthTexture(), 1F, this.x, ATLAS_SIZE - this.y - this.height, this.width, this.height);
+*/
+            //?}
+
+            //? if =1.21.10 {
+/*            GlStateManager._scissorBox(this.x, ATLAS_SIZE - this.y - this.height, this.width, this.height);
+            GlStateManager._enableScissorTest();
+            final int previousFbo = SignAtlasRenderTarget.this.bind(false);
+            GL11C.glClear(GL11C.GL_COLOR_BUFFER_BIT);
+            SignAtlasRenderTarget.this.unbind(previousFbo);
+            GlStateManager._disableScissorTest();
+*/
+            //?}
+            //? if <=1.21.4 {
+            /*GL11C.glScissor(this.x, ATLAS_SIZE - this.y - this.height, this.width, this.height);
+            GL11C.glEnable(GL11C.GL_SCISSOR_TEST);
+
+            *///?}
+            //? if =1.21.4 {
+/*            SignAtlasRenderTarget.this.clear();
+*/
+            //?}
+            //? if <=1.21.1 {
+            /*SignAtlasRenderTarget.this.clear(Minecraft.ON_OSX);
+
+            *///?}
+            //? if <=1.21.4 {
+            /*GL11C.glDisable(GL11C.GL_SCISSOR_TEST);
+            Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
+
+            *///?}
         }
 
         public Slot findSlot(final int width, final int height) {
@@ -156,4 +376,49 @@ public class SignAtlasRenderTarget extends TextureTarget implements AutoCloseabl
 
     }
 
+    //? if <=1.21.10 {
+    /*private class FboTexture extends AbstractTexture {
+
+
+    *///?}
+        //? if =1.21.10 {
+/*        private FboTexture() {
+            this.texture = SignAtlasRenderTarget.this.colorTexture;
+            this.textureView = RenderSystem.getDevice().createTextureView(this.texture);
+*/
+        //?}
+        //? if <=1.21.1 {
+        /*@Override
+        public void load(ResourceManager manager) {
+        }
+
+
+        *///?}
+        //? if <=1.21.4 {
+        /*@Override
+        public void releaseId() {
+
+        *///?}
+        //? if <=1.21.10 {
+        /*}
+
+        @Override
+
+        *///?}
+        //? if =1.21.10 {
+/*        public void close() {
+*/
+        //?}
+        //? if <=1.21.4 {
+        /*public int getId() {
+            return SignAtlasRenderTarget.this.colorTextureId;
+
+        *///?}
+        //? if <=1.21.10 {
+        /*}
+
+    }
+
+
+        *///?}
 }

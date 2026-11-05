@@ -1,0 +1,146 @@
+{
+  "1.20.4": {
+    "minecraft_version": "1.20.4",
+    "supported_minecraft_versions": "1.20,1.20.1,1.20.2,1.20.3,1.20.4",
+    "fabric_loader_version": "0.15.11",
+    "forge_version": "1.20.4-49.2.8",
+    "neoforge_version": "20.4.251",
+    "mixin_extras_version": "0.3.6",
+    "reflect_version": "1.6.2",
+    "java_version": "17",
+    "maven_version": "1.5.6-SNAPSHOT+1.20.4",
+    "upstream_branch": "1.20",
+    "upstream_commit": "c15801f44cce8c2d1cb7b0c702113179f789afe4",
+    "loaders": [
+      "fabric",
+      "forge",
+      "neoforge"
+    ],
+    "remap_minecraft": true,
+    "access_file": "immediatelyfast.accesswidener"
+  },
+  "1.21.1": {
+    "minecraft_version": "1.21.1",
+    "supported_minecraft_versions": "1.21,1.21.1",
+    "fabric_loader_version": "0.16.14",
+    "forge_version": "1.21.1-52.1.16",
+    "neoforge_version": "21.1.250",
+    "mixin_extras_version": "0.4.1",
+    "reflect_version": "1.6.2",
+    "java_version": "21",
+    "maven_version": "1.6.16-SNAPSHOT+1.21.1",
+    "upstream_branch": "1.21",
+    "upstream_commit": "896431f330ac266c6c7a6ecf6662ae5275130708",
+    "loaders": [
+      "fabric",
+      "forge",
+      "neoforge"
+    ],
+    "remap_minecraft": true,
+    "access_file": "immediatelyfast.accesswidener"
+  },
+  "1.21.4": {
+    "minecraft_version": "1.21.4",
+    "supported_minecraft_versions": "1.21.4",
+    "fabric_loader_version": "0.16.14",
+    "forge_version": "1.21.4-54.1.18",
+    "neoforge_version": "21.4.157",
+    "mixin_extras_version": "0.4.1",
+    "reflect_version": "1.6.2",
+    "java_version": "21",
+    "maven_version": "1.8.8-SNAPSHOT+1.21.4",
+    "upstream_branch": "1.21.4",
+    "upstream_commit": "3d9772687dd3fb7d8a47d42435cf50b876a49558",
+    "loaders": [
+      "fabric",
+      "forge",
+      "neoforge"
+    ],
+    "remap_minecraft": true,
+    "access_file": "immediatelyfast.accesswidener"
+  },
+  "1.21.10": {
+    "minecraft_version": "1.21.10",
+    "supported_minecraft_versions": "1.21.9,1.21.10",
+    "fabric_loader_version": "0.17.3",
+    "neoforge_version": "21.10.64",
+    "reflect_version": "1.6.2",
+    "java_version": "21",
+    "maven_version": "1.13.7-SNAPSHOT+1.21.10",
+    "upstream_branch": "1.21.9",
+    "upstream_commit": "9c496ca2c7a916098e0335d576dc6eaef407047f",
+    "loaders": [
+      "fabric",
+      "neoforge"
+    ],
+    "remap_minecraft": true,
+    "access_file": "immediatelyfast.accesswidener"
+  },
+  "1.21.11": {
+    "minecraft_version": "1.21.11",
+    "supported_minecraft_versions": "1.21.11",
+    "parchment_mappings": "1.21.11:2025.12.20",
+    "fabric_loader_version": "0.18.6",
+    "neoforge_version": "21.11.45",
+    "reflect_version": "1.6.2",
+    "java_version": "21",
+    "maven_version": "1.14.4-SNAPSHOT+1.21.11",
+    "upstream_branch": "1.21.11",
+    "upstream_commit": "8dbf4e926b8cf6ac7e2854018ab2f1f668f2f2f2",
+    "loaders": [
+      "fabric",
+      "neoforge"
+    ],
+    "remap_minecraft": true,
+    "access_file": "immediatelyfast.classtweaker"
+  },
+  "26.1.2": {
+    "minecraft_version": "26.1.2",
+    "supported_minecraft_versions": "26.1,26.1.1,26.1.2",
+    "fabric_loader_version": "0.18.6",
+    "neoforge_version": "26.1.2.109",
+    "reflect_version": "1.6.2",
+    "java_version": "25",
+    "maven_version": "1.15.4-SNAPSHOT+26.1",
+    "upstream_branch": "26.1",
+    "upstream_commit": "1469c700cc7f29d070bf0568384299cebae1faeb",
+    "loaders": [
+      "fabric",
+      "neoforge"
+    ],
+    "remap_minecraft": false,
+    "access_file": "immediatelyfast.classtweaker"
+  },
+  "26.2": {
+    "minecraft_version": "26.2",
+    "supported_minecraft_versions": "26.2",
+    "fabric_loader_version": "0.19.3",
+    "neoforge_version": "26.2.0.88",
+    "java_version": "25",
+    "maven_version": "1.16.6-SNAPSHOT+26.2",
+    "upstream_branch": "26.2",
+    "upstream_commit": "10579a430e03bb259264ca42bf1104163bc6a34a",
+    "loaders": [
+      "fabric",
+      "neoforge"
+    ],
+    "remap_minecraft": false,
+    "access_file": "immediatelyfast.classtweaker"
+  },
+  "26.3": {
+    "minecraft_version": "26.3",
+    "supported_minecraft_versions": "26.3",
+    "fabric_loader_version": "0.19.3",
+    "neoforge_version": "26.3.0.3-beta",
+    "java_version": "25",
+    "maven_version": "1.17.2-SNAPSHOT+26.3",
+    "upstream_branch": "26.3",
+    "upstream_commit": "2d8d8bf527c90cf72130626482e474a936b9018e",
+    "loaders": [
+      "fabric",
+      "neoforge"
+    ],
+    "remap_minecraft": false,
+    "access_file": "immediatelyfast.classtweaker"
+  }
+}

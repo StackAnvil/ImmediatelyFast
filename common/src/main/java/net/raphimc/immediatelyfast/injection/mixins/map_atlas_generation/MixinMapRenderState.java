@@ -1,3 +1,4 @@
+//? if >=1.21.4 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -18,7 +19,15 @@
 package net.raphimc.immediatelyfast.injection.mixins.map_atlas_generation;
 
 import net.minecraft.client.renderer.state.MapRenderState;
+//?}
+//? if >=26.2 {
 import net.minecraft.resources.Identifier;
+//?}
+//? if (>=1.21.4 && <=26.1.2) {
+/*import net.raphimc.immediatelyfast.feature.map_atlas_generation.MapAtlasTexture;
+*/
+//?}
+//? if >=1.21.4 {
 import net.raphimc.immediatelyfast.injection.interfaces.IMapRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,14 +36,20 @@ import org.spongepowered.asm.mixin.Unique;
 public abstract class MixinMapRenderState implements IMapRenderState {
 
     @Unique
+//?}
+    //? if >=26.2 {
     private Identifier immediatelyFast$atlasTextureId;
 
     @Unique
+    //?}
+    //? if >=1.21.4 {
     private int immediatelyFast$atlasX;
 
     @Unique
     private int immediatelyFast$atlasY;
 
+    //?}
+    //? if >=26.2 {
     @Override
     public Identifier immediatelyFast$getAtlasTextureId() {
         return this.immediatelyFast$atlasTextureId;
@@ -44,6 +59,13 @@ public abstract class MixinMapRenderState implements IMapRenderState {
     public void immediatelyFast$setAtlasTextureId(final Identifier identifier) {
         this.immediatelyFast$atlasTextureId = identifier;
     }
+    //?}
+    //? if (>=1.21.4 && <=26.1.2) {
+/*    @Unique
+    private MapAtlasTexture immediatelyFast$atlasTexture;
+*/
+    //?}
+//? if >=1.21.4 {
 
     @Override
     public int immediatelyFast$getAtlasX() {
@@ -64,4 +86,21 @@ public abstract class MixinMapRenderState implements IMapRenderState {
     public void immediatelyFast$setAtlasY(final int y) {
         this.immediatelyFast$atlasY = y;
     }
+//?}
+//? if (>=1.21.4 && <=26.1.2) {
+/*
+    @Override
+    public MapAtlasTexture immediatelyFast$getAtlasTexture() {
+        return this.immediatelyFast$atlasTexture;
+    }
+
+    @Override
+    public void immediatelyFast$setAtlasTexture(final MapAtlasTexture atlasTexture) {
+        this.immediatelyFast$atlasTexture = atlasTexture;
+    }
+
+*/
+//?}
+//? if >=1.21.4 {
 }
+//?}

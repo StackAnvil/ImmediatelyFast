@@ -1,3 +1,4 @@
+//? if >=26.2 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -17,12 +18,28 @@
  */
 package net.raphimc.immediatelyfast.util;
 
+//?}
+//? if =26.2 {
+/*import com.mojang.blaze3d.GpuFormat;
+*/
+//?}
+//? if >=26.2 {
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+//?}
+//? if =26.3 {
 import com.mojang.renderpearl.api.GpuFormat;
 import com.mojang.renderpearl.api.textures.AddressMode;
 import com.mojang.renderpearl.api.textures.FilterMode;
 import com.mojang.renderpearl.api.textures.GpuTexture;
+//?}
+//? if =26.2 {
+/*import com.mojang.blaze3d.textures.AddressMode;
+import com.mojang.blaze3d.textures.FilterMode;
+import com.mojang.blaze3d.textures.GpuTexture;
+*/
+//?}
+//? if >=26.2 {
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.Dumpable;
 import net.minecraft.resources.Identifier;
@@ -43,3 +60,4 @@ public class GpuOnlyTexture extends AbstractTexture implements Dumpable {
     }
 
 }
+//?}

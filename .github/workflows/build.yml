@@ -8,6 +8,10 @@ jobs:
   build:
     runs-on: "ubuntu-26.04"
     if: "${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        minecraft: ["1.20.4", "1.21.1", "1.21.4", "1.21.10", "1.21.11", "26.1.2", "26.2", "26.3"]
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
@@ -15,25 +19,22 @@ jobs:
           persist-credentials: false
       - name: "Set up Gradle"
         uses: "gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6" # v6.4.0
-        with:
-          cache-disabled: true
       - name: "Set up Java"
         uses: "actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad" # v6.1.0
         with:
           distribution: "temurin"
-          java-version: 25
-          check-latest: true
-      - name: "Build with Gradle"
-        run: "./gradlew build --stacktrace"
-      - name: "Upload Fabric artifacts to GitHub"
+          java-version: |
+            17
+            21
+            25
+      - name: "Build and verify artifacts"
+        run: "./gradlew -Pminecraft=${{ matrix.minecraft }} build verifyArtifacts --stacktrace"
+      - name: "Upload artifacts"
         uses: "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9" # v7.0.2
         with:
-          name: "ImmediatelyFast Fabric"
-          path: "fabric/build/libs/"
-          if-no-files-found: "error"
-      - name: "Upload NeoForge artifacts to GitHub"
-        uses: "actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9" # v7.0.2
-        with:
-          name: "ImmediatelyFast NeoForge"
-          path: "neoforge/build/libs/"
+          name: "ImmediatelyFast ${{ matrix.minecraft }}"
+          path: |
+            fabric/versions/${{ matrix.minecraft }}/build/libs/*.jar
+            forge/versions/${{ matrix.minecraft }}/build/libs/*.jar
+            neoforge/versions/${{ matrix.minecraft }}/build/libs/*.jar
           if-no-files-found: "error"

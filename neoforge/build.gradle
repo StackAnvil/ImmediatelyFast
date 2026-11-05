@@ -4,7 +4,7 @@ plugins {
 
 loom {
     neoForge {
-        convertAccessWideners(tasks.named("jar"), loom.accessWidenerPath.get().getAsFile().name)
+        convertAccessWideners(tasks.named(project.remap_minecraft ? "remapJar" : "jar"), loom.accessWidenerPath.get().getAsFile().name)
     }
 }
 
@@ -17,13 +17,22 @@ repositories {
 
 dependencies {
     neoForge "net.neoforged:neoforge:${project.neoforge_version}"
+    if (project.hasProperty("reflect_version")) {
+        include "net.lenni0451:Reflect:${project.reflect_version}"
+    }
 }
 
 processResources {
     inputs.property("version", project.version)
 
     def projectVersion = project.version
-    filesMatching("META-INF/neoforge.mods.toml") {
+    filesMatching(["META-INF/mods.toml", "META-INF/neoforge.mods.toml"]) {
         expand("version": projectVersion)
+    }
+}
+
+jar {
+    from(rootProject.file("common/src/main/resources/assets/immediatelyfast/icon.png")) {
+        rename { "immediatelyfast-icon.png" }
     }
 }

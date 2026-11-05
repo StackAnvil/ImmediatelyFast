@@ -1,3 +1,4 @@
+//? if >=1.21.11 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -24,12 +25,29 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.ArrayList;
 
+//?}
+//? if >=26.1.2 {
 @Mixin(targets = "net.minecraft.client.renderer.state.gui.GuiRenderState$Node")
+//?}
+//? if =1.21.11 {
+/*@Mixin(targets = "net.minecraft.client.gui.render.state.GuiRenderState$Node")
+*/
+//?}
+//? if >=1.21.11 {
 public abstract class MixinGuiRenderState_Node {
 
+//?}
+    //? if >=26.1.2 {
     @Redirect(method = {"addItem", "addText", "addPicturesInPictureState", "addGuiElement"}, at = @At(value = "NEW", target = "()Ljava/util/ArrayList;"))
+    //?}
+    //? if =1.21.11 {
+/*    @Redirect(method = {"submitItem", "submitText", "submitPicturesInPictureState", "submitGuiElement"}, at = @At(value = "NEW", target = "()Ljava/util/ArrayList;"))
+*/
+    //?}
+    //? if >=1.21.11 {
     private ArrayList<?> useSpatialArrayList() {
         return new SpatialArrayList<>();
     }
 
 }
+    //?}

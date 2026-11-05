@@ -1,3 +1,8 @@
+> This is the StackAnvil fork of [RaphiMC/ImmediatelyFast](https://github.com/RaphiMC/ImmediatelyFast).
+> All maintained Minecraft versions share one Stonecutter project on the `26.3` branch.
+> See [Building and maintaining the fork](docs/BUILDING.md) for build commands and the supported targets.
+> The Modrinth and CurseForge links below refer to the upstream releases.
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/RaphiMC/ImmediatelyFast/1.20/common/src/main/resources/assets/immediatelyfast/icon.png" width="150">
   <h1>ImmediatelyFast</h1>
@@ -107,7 +112,7 @@ Known incompatibilities:
 - OptiFabric / OptiFine
 - Most closed source "clients" like LunarClient and LabyMod
 
-If you encounter any issues, please report them on the [Issue Tracker](https://github.com/RaphiMC/ImmediatelyFast/issues).
+If you encounter any issues, please report them on the [Issue Tracker](https://github.com/StackAnvil/ImmediatelyFast/issues).
 
 ## Config
 ImmediatelyFast has a config file which can be found in the `config` folder of your Minecraft instance. Most options should be left at their default values, but some may be tweaked to improve performance or compatibility.  

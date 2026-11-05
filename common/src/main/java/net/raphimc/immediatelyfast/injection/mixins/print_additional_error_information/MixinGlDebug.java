@@ -1,3 +1,4 @@
+//? if >=1.21.10 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -17,7 +18,15 @@
  */
 package net.raphimc.immediatelyfast.injection.mixins.print_additional_error_information;
 
+//?}
+//? if =26.3 {
 import com.mojang.renderpearl.backend.opengl.GlDebug;
+//?}
+//? if (>=1.21.10 && <=26.2) {
+/*import com.mojang.blaze3d.opengl.GlDebug;
+*/
+//?}
+//? if >=1.21.10 {
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,13 +40,36 @@ public abstract class MixinGlDebug {
     @Unique
     private static long immediatelyFast$lastTime;
 
+//?}
+    //? if >=26.2 {
     @ModifyVariable(method = "enableDebugCallback", at = @At("HEAD"), name = "debugSynchronousGlLogs", argsOnly = true)
     private static boolean enableSyncDebug(final boolean debugSynchronousGlLogs) {
+    //?}
+    //? if (>=1.21.10 && <=26.1.2) {
+/*    @ModifyVariable(method = "enableDebugCallback", at = @At("HEAD"), index = 1, argsOnly = true)
+    private static boolean enableSyncDebug(boolean sync) {
+*/
+    //?}
+        //? if >=1.21.10 {
         return true;
     }
 
+        //?}
+    //? if >=26.1.2 {
     @Redirect(method = "printDebugLog", at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;)V"))
+    //?}
+    //? if >=26.2 {
     private void appendStackTrace(final Logger instance, final String message, final Object argument) {
+    //?}
+    //? if (>=1.21.10 && <=1.21.11) {
+/*    @Redirect(method = "printDebugLog", at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;)V", remap = false))
+*/
+    //?}
+    //? if (>=1.21.10 && <=26.1.2) {
+/*    private void appendStackTrace(Logger instance, String message, Object argument) {
+*/
+    //?}
+        //? if >=1.21.10 {
         if (System.currentTimeMillis() - immediatelyFast$lastTime > 1000) {
             immediatelyFast$lastTime = System.currentTimeMillis();
             instance.info(message, argument, new Exception());
@@ -47,3 +79,4 @@ public abstract class MixinGlDebug {
     }
 
 }
+        //?}

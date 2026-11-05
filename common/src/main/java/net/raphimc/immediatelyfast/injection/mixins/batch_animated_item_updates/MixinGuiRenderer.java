@@ -1,3 +1,4 @@
+//? if >=26.1.2 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -22,6 +23,13 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.client.gui.render.GuiItemAtlas;
 import net.minecraft.client.gui.render.GuiRenderer;
+//?}
+//? if =26.1.2 {
+/*import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+*/
+//?}
+//? if >=26.1.2 {
 import net.minecraft.client.renderer.feature.FeatureRenderDispatcher;
 import net.minecraft.client.renderer.item.TrackingItemStackRenderState;
 import net.minecraft.client.renderer.state.gui.GuiRenderState;
@@ -46,7 +54,25 @@ public abstract class MixinGuiRenderer implements IGuiRenderer {
 
     @Shadow
     @Final
+//?}
+    //? if =26.1.2 {
+/*    private SubmitNodeCollector submitNodeCollector;
+
+    @Shadow
+    @Final
+*/
+    //?}
+    //? if >=26.1.2 {
     private FeatureRenderDispatcher featureRenderDispatcher;
+    //?}
+//? if =26.1.2 {
+/*
+    @Shadow
+    @Final
+    private MultiBufferSource.BufferSource bufferSource;
+*/
+//?}
+//? if >=26.1.2 {
 
     @Shadow
     private int cachedGuiScale;
@@ -103,7 +129,15 @@ public abstract class MixinGuiRenderer implements IGuiRenderer {
         final int newTextureSize = AnimatedItemAtlas.computeTextureSizeFor(slotTextureSize, animatedItemsInFrame.size());
         if (this.immediatelyFast$animatedItemAtlas == null || newTextureSize > this.immediatelyFast$animatedItemAtlas.textureSize() || newTextureSize < this.immediatelyFast$animatedItemAtlas.textureSize() / 4) {
             this.immediatelyFast$closeAnimatedItemAtlas();
+//?}
+            //? if >=26.2 {
             this.immediatelyFast$animatedItemAtlas = new AnimatedItemAtlas(this.featureRenderDispatcher, newTextureSize, slotTextureSize);
+            //?}
+            //? if =26.1.2 {
+/*            this.immediatelyFast$animatedItemAtlas = new AnimatedItemAtlas(this.submitNodeCollector, this.featureRenderDispatcher, this.bufferSource, newTextureSize, slotTextureSize);
+*/
+            //?}
+        //? if >=26.1.2 {
         }
         return this.immediatelyFast$animatedItemAtlas.tryPrepareFor(animatedItemsInFrame); // Return if all items fit in the atlas
     }
@@ -122,3 +156,4 @@ public abstract class MixinGuiRenderer implements IGuiRenderer {
     }
 
 }
+        //?}

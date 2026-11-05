@@ -1,3 +1,4 @@
+//? if >=1.21.11 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -18,8 +19,17 @@
 package net.raphimc.immediatelyfast.injection.mixins.fast_gui_layer_lookup;
 
 import net.minecraft.client.gui.navigation.ScreenRectangle;
+//?}
+//? if >=26.1.2 {
 import net.minecraft.client.renderer.state.gui.GuiRenderState;
 import net.minecraft.client.renderer.state.gui.ScreenArea;
+//?}
+//? if =1.21.11 {
+/*import net.minecraft.client.gui.render.state.GuiRenderState;
+import net.minecraft.client.gui.render.state.ScreenArea;
+*/
+//?}
+//? if >=1.21.11 {
 import net.raphimc.immediatelyfast.feature.fast_gui_layer_lookup.SpatialArrayList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,10 +42,21 @@ import java.util.List;
 public abstract class MixinGuiRenderState {
 
     @Inject(method = "hasIntersection", at = @At("HEAD"), cancellable = true)
+//?}
+    //? if >=26.1.2 {
     private void checkSpatialList(final ScreenRectangle bounds, final List<? extends ScreenArea> states, final CallbackInfoReturnable<Boolean> cir) {
         if (states instanceof SpatialArrayList<?> spatialArrayList && spatialArrayList.isStateValid()) {
             cir.setReturnValue(spatialArrayList.intersects(bounds));
+    //?}
+    //? if =1.21.11 {
+/*    private void checkSpatialList(final ScreenRectangle rectangle, final List<? extends ScreenArea> screenAreas, final CallbackInfoReturnable<Boolean> cir) {
+        if (screenAreas instanceof SpatialArrayList<?> spatialArrayList && spatialArrayList.isStateValid()) {
+            cir.setReturnValue(spatialArrayList.intersects(rectangle));
+*/
+    //?}
+        //? if >=1.21.11 {
         }
     }
 
 }
+        //?}

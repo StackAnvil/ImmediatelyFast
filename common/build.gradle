@@ -3,9 +3,12 @@ plugins {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/immediatelyfast.classtweaker")
+    accessWidenerPath = file("src/main/resources/${project.access_file}")
 }
 
 dependencies {
-    implementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}" // Needed to pull in mixin and mixin-extras
+    add(project.remap_minecraft ? "modImplementation" : "implementation", "net.fabricmc:fabric-loader:${project.fabric_loader_version}")
+    if (project.hasProperty("reflect_version")) {
+        api "net.lenni0451:Reflect:${project.reflect_version}"
+    }
 }

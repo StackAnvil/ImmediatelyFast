@@ -1,3 +1,4 @@
+//? if =26.3 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -36,3 +37,4 @@ public record ImmediatelyFastResourcePackMetadata(List<String> compatibleFeature
     public static final MetadataSectionType<ImmediatelyFastResourcePackMetadata> SERIALIZER = new MetadataSectionType<>("immediatelyfast", CODEC);
 
 }
+//?}

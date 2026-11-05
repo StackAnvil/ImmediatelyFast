@@ -3,27 +3,27 @@ plugins {
 }
 
 publishMods {
-    file = jar.archiveFile
+    file = tasks.named(project.remap_minecraft ? "remapJar" : "jar").flatMap { it.archiveFile }
     version = project.version + '-' + loom.platform.get().id()
     modLoaders.add(loom.platform.get().id())
-    if (project.name == "fabric") {
+    if (project.parent.name == "fabric") {
         modLoaders.add("quilt")
     }
 
-    curseforge {
+    if (providers.gradleProperty("curseforge.project_id").isPresent()) curseforge {
         accessToken = providers.gradleProperty("curseforge.publishing_token")
-        projectId = "686911"
+        projectId = providers.gradleProperty("curseforge.project_id")
         minecraftVersionList(project.supported_minecraft_versions)
         javaVersions.add(JavaVersion.toVersion(java.toolchain.languageVersion.get().asInt()))
         client = true
         server = false
     }
-    modrinth {
+    if (providers.gradleProperty("modrinth.project_id").isPresent()) modrinth {
         accessToken = providers.gradleProperty("modrinth.publishing_token")
-        projectId = "5ZwdcRci"
+        projectId = providers.gradleProperty("modrinth.project_id")
         minecraftVersionList(project.supported_minecraft_versions)
     }
     github {
-        parent project(":common").tasks.named("publishGithub")
+        parent project(":common:${project.name}").tasks.named("publishGithub")
     }
 }

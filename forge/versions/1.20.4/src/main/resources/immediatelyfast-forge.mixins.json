@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.raphimc.immediatelyfast.forge.injection.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "net.raphimc.immediatelyfast.injection.ImmediatelyFastMixinPlugin",
+  "client": [
+    "core.MixinForgeRenderTypes",
+    "core.compat.webdisplays.MixinWebDisplays_MinePadRenderer",
+    "hud_batching.MixinForgeGui",
+    "hud_batching.compat.appleskin.MixinAppleSkin_HUDOverlayHandler",
+    "hud_batching.consumer.MixinGuiGraphics",
+    "screen_batching.MixinHandledScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

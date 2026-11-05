@@ -1,3 +1,4 @@
+//? if >=26.2 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -62,3 +63,4 @@ public abstract class MixinScissorState {
     }
 
 }
+//?}

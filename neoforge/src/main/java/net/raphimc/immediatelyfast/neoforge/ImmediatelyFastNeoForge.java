@@ -17,19 +17,43 @@
  */
 package net.raphimc.immediatelyfast.neoforge;
 
+//? if >=1.21.11 {
 import net.minecraft.resources.Identifier;
+//?}
+//? if (>=1.21.4 && <=1.21.10) {
+/*import net.minecraft.resources.ResourceLocation;
+*/
+//?}
+//? if >=1.21.4 {
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+//?}
 import net.neoforged.fml.common.Mod;
+//? if >=1.21.4 {
 import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.raphimc.immediatelyfast.ImmediatelyFast;
+//?}
 
 @Mod("immediatelyfast")
+//? if >=1.21.10 {
 @EventBusSubscriber(modid = "immediatelyfast")
+//?}
+//? if =1.21.4 {
+/*@EventBusSubscriber(modid = "immediatelyfast", bus = EventBusSubscriber.Bus.MOD)
+@SuppressWarnings("removal")
+*/
+//?}
 public class ImmediatelyFastNeoForge {
 
+    //? if >=1.21.11 {
     private static final Identifier SIGN_TEXT_CACHE_RELOAD_LISTENER_ID = Identifier.fromNamespaceAndPath("immediatelyfast", "sign_text_cache_reload_listener");
+    //?}
+    //? if (>=1.21.4 && <=1.21.10) {
+/*    private static final ResourceLocation SIGN_TEXT_CACHE_RELOAD_LISTENER_ID = ResourceLocation.fromNamespaceAndPath("immediatelyfast", "sign_text_cache_reload_listener");
+*/
+    //?}
+//? if >=1.21.4 {
 
     @SubscribeEvent
     private static void onAddClientReloadListeners(final AddClientReloadListenersEvent event) {
@@ -38,4 +62,5 @@ public class ImmediatelyFastNeoForge {
         }
     }
 
+//?}
 }

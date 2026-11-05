@@ -1,3 +1,4 @@
+//? if >=1.21.11 {
 /*
  * This file is part of ImmediatelyFast - https://github.com/RaphiMC/ImmediatelyFast
  * Copyright (C) 2023-2026 RK_01/RaphiMC and contributors
@@ -18,7 +19,15 @@
 package net.raphimc.immediatelyfast.feature.fast_gui_layer_lookup;
 
 import net.minecraft.client.gui.navigation.ScreenRectangle;
+//?}
+//? if >=26.1.2 {
 import net.minecraft.client.renderer.state.gui.ScreenArea;
+//?}
+//? if =1.21.11 {
+/*import net.minecraft.client.gui.render.state.ScreenArea;
+*/
+//?}
+//? if >=1.21.11 {
 
 import java.util.ArrayList;
 
@@ -72,3 +81,4 @@ public class SpatialArrayList<E extends ScreenArea> extends ArrayList<E> {
     }
 
 }
+//?}

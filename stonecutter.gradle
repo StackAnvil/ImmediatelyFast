@@ -1,0 +1,31 @@
+plugins {
+    id "dev.kikugie.stonecutter"
+    id "dev.architectury.loom-remap" version "1.17.493" apply false
+    id "dev.architectury.loom-no-remap" version "1.17.493" apply false
+    id "me.modmuss50.mod-publish-plugin" version "2.2.1" apply false
+}
+
+if (providers.gradleProperty("minecraft").isPresent()) {
+    stonecutter.active null
+} else {
+    stonecutter.active "26.3"
+}
+
+def nodes = stonecutter.tree.getNodes().collect { it.project }
+tasks.register("build") {
+    group = "build"
+    description = "Builds every selected Minecraft version and loader."
+    dependsOn(nodes.collect { "${it.path}:build" })
+}
+tasks.register("clean") {
+    group = "build"
+    dependsOn(nodes.collect { "${it.path}:clean" })
+}
+
+tasks.register("verifyArtifacts", Exec) {
+    group = "verification"
+    description = "Checks metadata, platform services, Mixins, and Java versions in the built jars."
+    dependsOn(nodes.collect { "${it.path}:build" })
+    commandLine(["python3", rootProject.file("scripts/verify_artifacts.py").path] +
+            stonecutter.versions.collect { it.project }.sort())
+}

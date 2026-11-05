@@ -1,0 +1,32 @@
+plugins {
+    id "immediatelyfast.platform-conventions"
+}
+
+loom {
+    forge {
+        convertAccessWideners(tasks.named("remapJar"), loom.accessWidenerPath.get().getAsFile().name)
+        mixinConfig("immediatelyfast-common.mixins.json")
+        mixinConfig("immediatelyfast-forge.mixins.json")
+    }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:${project.forge_version}"
+    annotationProcessor(implementation("io.github.llamalad7:mixinextras-common:${project.mixin_extras_version}"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:${project.mixin_extras_version}"))
+    include "net.lenni0451:Reflect:${project.reflect_version}"
+}
+
+processResources {
+    inputs.property("version", project.version)
+    def projectVersion = project.version
+    filesMatching("META-INF/mods.toml") {
+        expand("version": projectVersion)
+    }
+}
+
+jar {
+    from(rootProject.file("common/src/main/resources/assets/immediatelyfast/icon.png")) {
+        rename { "immediatelyfast-icon.png" }
+    }
+}

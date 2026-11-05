@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.raphimc.immediatelyfast.neoforge.injection.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "net.raphimc.immediatelyfast.injection.ImmediatelyFastMixinPlugin",
+  "client": [
+    "core.MixinNeoForgeRenderTypes",
+    "hud_batching.MixinGuiLayerManager",
+    "hud_batching.compat.appleskin.MixinAppleSkin_HUDOverlayHandler",
+    "screen_batching.MixinClientHooks"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
